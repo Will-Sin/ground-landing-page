@@ -4,7 +4,7 @@
 // import { sendChat } from 'main.js';
 
 var test_url = 'http://127.0.0.1:8000/api';
-var dev_url = ""
+var dev_url = 'http://nftjoseph.pythonanywhere/api';
 
 var scenario_select = document.getElementById("scenario_select");
 var sendButton = document.getElementsByClassName("send-text-message")[0];
@@ -90,7 +90,7 @@ async function fetchChat(user_input, chat_history) {
     redirect: 'follow'
   };
 
-  return fetch(`${test_url}/book/${bookID}/${user_cave}/${scenario_id}/`, requestOptions)
+  return fetch(`${dev_url}/book/${bookID}/${user_cave}/${scenario_id}/`, requestOptions)
 };
 
 /** A fetch function that sends the inputed scenario ID and returns whether there is a script to post or not*/
@@ -119,7 +119,7 @@ async function fetchScript(scenario_id) {
     redirect: 'follow'
   };
 
-  return fetch(`${test_url}/script/${bookID}/${user_cave}/${scenario_id}/`, requestOptions)
+  return fetch(`${dev_url}/script/${bookID}/${user_cave}/${scenario_id}/`, requestOptions)
 };
 
 /** Called once the send button is clicked and sends the inputed text to the fetch function that calls the Oracle Endpoint*/
@@ -651,7 +651,7 @@ var audioRecorder = {
 
         // console.log(formData);
 
-        fetch(`${test_url}/upload/${bookID}/${user_cave}/${scenario_id}/`, {
+        fetch(`${dev_url}/upload/${bookID}/${user_cave}/${scenario_id}/`, {
             method: 'POST',
             body: formData
         })
