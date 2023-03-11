@@ -4,7 +4,7 @@
 // import { sendChat } from 'main.js';
 
 var test_url = 'http://127.0.0.1:8000/api';
-var dev_url = 'http://nftjoseph.pythonanywhere/api';
+var dev_url = 'https://nftjoseph.pythonanywhere/api';
 
 var scenario_select = document.getElementById("scenario_select");
 var sendButton = document.getElementsByClassName("send-text-message")[0];
