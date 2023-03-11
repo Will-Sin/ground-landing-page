@@ -128,12 +128,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 # Uncomment for production
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
-# STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = 'static/'
+"""
 STATIC_ROOT = "/Users/wet-virus/PycharmProjects/DjangoTest/firstproject/static"
 STATIC_URL = "landing/static/"
-
+"""
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
