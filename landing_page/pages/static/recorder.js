@@ -3,7 +3,7 @@
 //none
 // import { sendChat } from 'main.js';
 
-var productionURL = 'http://127.0.0.1:8000/api';
+var devURL = 'http://127.0.0.1:8000/api';
 var productionURL = 'https://nftjoseph.pythonanywhere.com/api';
 
 var scenarioSelectDiv = document.getElementById("scenario_select");
@@ -715,6 +715,7 @@ var audioRecorder = {
         formData.append('file', new File(audioRecorder.audioBlobs, 'recording.wav'));
 
         // console.log(formData);
+        // consoleDiv.innerHTML = JSON.stringify(formData)
 
         fetch(`${productionURL}/upload/${bookID}/${user_cave}/${scenario_id}/`, {
             method: 'POST',
@@ -733,9 +734,7 @@ var audioRecorder = {
             consoleDiv.innerHTML = JSON.stringify(data)
             var binary = interactionCalculator(data);
 
-            if (binary == 0) {
-                update_DOM(data["gpt response"], "Oracle:");
-            };
+            update_DOM(data["gpt response"], "Oracle:");
         })
 
     },
