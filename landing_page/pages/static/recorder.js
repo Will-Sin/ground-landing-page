@@ -197,6 +197,10 @@ async function scnearioVerify() {
 
     interactionCalculator(response_object)
 
+    if (response !== "no script needed") {
+        update_DOM(response, oracle_name);
+    }
+
 };
 
 /** Called once the scenario is changed or selected, and checks if there needs to be script for the Oracle or not*/
@@ -229,6 +233,10 @@ async function caveVerify() {
     consoleDiv.innerHTML = JSON.stringify(response_object)
 
     interactionCalculator(response_object)
+
+    if (response !== "no script needed") {
+        update_DOM(response, oracle_name);
+    }
 
 };
 
