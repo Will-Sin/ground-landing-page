@@ -3,7 +3,7 @@
 //none
 // import { sendChat } from 'main.js';
 
-var test_url = 'http://127.0.0.1:8000/api';
+var productionURL = 'http://127.0.0.1:8000/api';
 var productionURL = 'https://nftjoseph.pythonanywhere.com/api';
 
 var scenarioSelectDiv = document.getElementById("scenario_select");
@@ -15,6 +15,7 @@ var recorderDiv = document.getElementsByClassName("recorder-div");
 var messageBoxDiv = document.getElementsByClassName("message-box-div");
 var interactionsCountDiv = document.getElementsByClassName("interactions")[0];
 var caveAndScenarioErrorDiv = document.getElementsByClassName("cave-scenario-error")[0];
+var consoleDiv = document.getElementsByClassName("console")[0];
 
 var interactionsCount;
 var scenario_id;
@@ -185,10 +186,14 @@ async function scnearioVerify() {
       if (response != "no script needed") {
         window.chat_history = response;
         console.log(response_object);
+        consoleDiv.innerHTML = JSON.stringify(response_object)
       } else {
         console.log(response_object);
+        consoleDiv.innerHTML = JSON.stringify(response_object)
       }
     }
+
+    consoleDiv.innerHTML = JSON.stringify(response_object)
 
     interactionCalculator(response_object)
 
@@ -214,10 +219,14 @@ async function caveVerify() {
       if (response != "no script needed") {
         window.chat_history = response;
         console.log(response_object);
+        consoleDiv.innerHTML = JSON.stringify(response_object)
       } else {
         console.log(response_object);
+        consoleDiv.innerHTML = JSON.stringify(response_object)
       }
     }
+
+    consoleDiv.innerHTML = JSON.stringify(response_object)
 
     interactionCalculator(response_object)
 
@@ -713,6 +722,7 @@ var audioRecorder = {
         })
         .then(response => {
             if (!response.ok) {
+              consoleDiv.innerHTML = 'Network response was not ok'
               throw new Error('Network response was not ok');
             }
 
@@ -720,6 +730,7 @@ var audioRecorder = {
         })
         .then(data => {
             console.log('Server response:', data);
+            consoleDiv.innerHTML = JSON.stringify(data)
             var binary = interactionCalculator(data);
 
             if (binary == 0) {
