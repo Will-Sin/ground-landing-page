@@ -689,7 +689,7 @@ var audioRecorder = {
             //listen to the stop event in order to create & return a single Blob object
             audioRecorder.mediaRecorder.addEventListener("stop", () => {
                 //create a single blob object, as we might have gathered a few Blob objects that needs to be joined as one
-                let audioBlob = new Blob(audioRecorder.audioBlobs, { type: "audio/webm" });
+                let audioBlob = new Blob(audioRecorder.audioBlobs, { type: "audio/wav" });
 
                 //resolve promise with the single audio blob representing the recorded audio
                 resolve(audioBlob);
