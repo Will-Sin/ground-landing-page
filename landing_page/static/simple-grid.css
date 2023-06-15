@@ -114,6 +114,18 @@ p {
 
 /* ==== USER CSS ==== */
 
+#glow-in {
+  animation-duration: 2s;
+  animation-name: animate-fade;
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes animate-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 .fade-in {
   transition: opacity 1s;
   opacity: 1;
@@ -367,7 +379,7 @@ a {
   display: none;
 }
 
-@media only screen and (min-width: 33.75em) {  /* 540px */
+@media only screen and (min-width: 45em) {  /* 720px */
   .container {
     width: 80%;
   }
@@ -386,9 +398,7 @@ a {
     position: absolute;
     margin-bottom: 0%;
   }
-}
 
-@media only screen and (min-width: 45em) {  /* 720px */
   .col-1 {
     width: 4.33%;
   }
@@ -440,9 +450,7 @@ a {
   .hidden-sm {
     display: block;
   }
-}
 
-@media only screen and (min-width: 60em) { /* 960px */
   .container {
     width: 75%;
     max-width: 60rem;
