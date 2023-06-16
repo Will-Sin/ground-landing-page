@@ -24,16 +24,24 @@
 
     <div class="row">
         <div class="col-2">
-            <select id="cave_select">
-                <option value="0">CAVE SELECT</option>
-                <option value="1">GREEN</option>
-                <option value="2">BEAUTY</option>
-                <option value="3">RAGE</option>
-                <option value="4">BODY</option>
-                <option value="5">FAITH</option>
-                <option value="6">KNOWLEDGE</option>
-                <option value="7">DISORDER</option>
-            </select>
+            <form>
+                <input
+                  class="chosen-value"
+                  type="text"
+                  value=""
+                  placeholder="CAVE SELECT"
+                />
+                <ul class="value-list">
+                  <!-- List of tech giants -->
+                  <li>GREEN</li>
+                  <li>BEAUTY</li>
+                  <li>RAGE</li>
+                  <li>BODY</li>
+                  <li>FAITH</li>
+                  <li>KNOWLEDGE</li>
+                  <li>DISORDER</li>
+                </ul>
+              </form>
         </div>
         <div class="col-2">
             <select id="scenario_select">
@@ -136,3 +144,4 @@
 </div>
 
 <script src="{% static 'recorder.js' %}"></script>
+<script src="{% static 'main.js' %}"></script>

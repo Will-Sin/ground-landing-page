@@ -36,6 +36,10 @@ body {
   left: 0;
   top: 0;
   font-size: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
 }
 
 /* ROOT FONT STYLES */
@@ -111,6 +115,86 @@ p {
 .justify {
   text-align: justify;
 }
+
+/* DROP DOWN */
+
+form {
+  position: relative;
+  width: 25rem;
+  margin-top: 12vh;
+}
+
+.chosen-value, .value-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.chosen-value {
+  font-family: 'Ek Mukta';
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 4px;
+  height: 4rem;
+  font-size: 1.1rem;
+  padding: 1rem;
+  background-color: #FAFCFD;
+  border: 3px solid transparent;
+  transition: 0.3s ease-in-out;
+}
+.chosen-value::-webkit-input-placeholder {
+  color: #333;
+}
+.chosen-value:hover {
+  background-color: #0844eb;
+  cursor: pointer;
+}
+.chosen-value:hover::-webkit-input-placeholder {
+  color: #333;
+}
+.chosen-value:focus, .chosen-value.open {
+  outline: 0;
+  background-color: #2912f7;
+  color: #000;
+}
+.chosen-value:focus::-webkit-input-placeholder, .chosen-value.open::-webkit-input-placeholder {
+  color: #000;
+}
+.value-list {
+  list-style: none;
+  margin-top: 4rem;
+  overflow: hidden;
+  max-height: 0;
+  transition: 0.3s ease-in-out;
+  padding: 0rem;
+}
+.value-list.open {
+  max-height: 40rem;
+  overflow: auto;
+}
+.value-list li {
+  position: relative;
+  height: 2rem;
+  background-color: #FAFCFD;
+  padding: 1rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  opacity: 1;
+}
+.value-list li:hover {
+  background-color: #450ae9;
+  color: white;
+}
+.value-list li.closed {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+  opacity: 0;
+}
+
 
 /* ==== USER CSS ==== */
 
