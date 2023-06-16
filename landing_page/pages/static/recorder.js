@@ -6,10 +6,10 @@
 var devURL = 'http://127.0.0.1:8000/api';
 var productionURL = 'https://nftjoseph.pythonanywhere.com/api';
 
-var scenarioSelectDiv = document.getElementById("scenario_select");
-var caveSelectDiv = document.getElementById("cave_select");
+var scenarioSelectInput = document.getElementsByClassName("chosen-value")[1];
+var caveSelectInput = document.getElementsByClassName("chosen-value")[0];
 var sendButton = document.getElementsByClassName("send-text-message")[0];
-var inputField = document.getElementById("text-input");
+var inputField = document.getElementsByClassName("text-input")[0];
 var bookIDObject = document.getElementsByClassName("book-id")[0];
 var recorderDiv = document.getElementsByClassName("recorder-div");
 var messageBoxDiv = document.getElementsByClassName("message-box-div");
@@ -28,11 +28,30 @@ window.chat_history = ""
 // Listen to the send button for text chat
 sendButton.onclick = sendChat;
 
-// Listen to Scenario Selector
-scenarioSelectDiv.onchange = scnearioVerify;
+// Loop through each dropdown
+dropdowns.forEach((dropdown, index) => {
+  const inputField = inputFields[index];
+  const dropdownArray = [...dropdown.querySelectorAll('li')];
 
-// Listen to Scenario Selector
-caveSelectDiv.onchange = caveVerify;
+  // Rest of your existing dropdown code...
+
+  dropdownArray.forEach(item => {
+    item.addEventListener('click', () => {
+      inputField.value = item.textContent;
+      dropdown.classList.remove('open');
+      // Trigger scenario verification when a list item is clicked
+      if (inputField === scenarioSelectInput) {
+        scenarioVerify();
+      }
+      // Trigger cave verification when a list item is clicked
+      if (inputField === caveSelectInput) {
+        caveVerify();
+      }
+    });
+  });
+
+  // Rest of your existing dropdown code...
+});
 
 /** Takes a text input and user name to then post the chat repsonse into the DOM*/
 function update_DOM(input, user) {
@@ -52,7 +71,7 @@ function interactionCalculator(response_object) {
 
   console.log(interactionsCount)
 
-  if (interactionsCount == 0) {
+  if (interactionsCount <= 0) {
     recorderDiv[0].classList.remove("hide");
     recorderDiv[1].classList.remove("hide");
 
@@ -76,7 +95,7 @@ function interactionCalculator(response_object) {
 /***/
 function caveAndScenarioCheck(cave, scenario) {
 
-    if (cave === "CAVE SELECT" || scenario === "SCENARIO SELECT") {
+    if (cave === "" || scenario === "") {
         caveAndScenarioErrorDiv.classList.remove("hide");
         return 0
     } else {
@@ -88,8 +107,8 @@ function caveAndScenarioCheck(cave, scenario) {
 /***/
 function caveAndScenarioSetVariables() {
 
-    scenario_id = scenarioSlect.options[scenarioSlect.selectedIndex].text;
-    user_cave = caveSelect.options[caveSelect.selectedIndex].text;
+    scenario_id = scenarioSelectInput.value;
+    user_cave = caveSelectInput.value;
     bookID = bookIDObject.value;
 
     return caveAndScenarioCheck(user_cave, scenario_id)
@@ -167,7 +186,7 @@ async function sendChat() {
 
 
 /** Called once the scenario is changed or selected, and checks if there needs to be script for the Oracle or not*/
-async function scnearioVerify() {
+async function scenarioVerify() {
 
     let check = await caveAndScenarioSetVariables()
 

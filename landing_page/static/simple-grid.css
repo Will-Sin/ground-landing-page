@@ -39,6 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
 
 }
 
@@ -47,6 +48,9 @@ body {
 * {
   font-family: 'HelveticaNowDisplay', 'Lato', Helvetica, sans-serif;
   color: black;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   line-height: 1.3;
   -moz-osx-font-smoothing: grayscale; /*(For Firefox)*/
   -webkit-font-smoothing: antialiased; /*(For Chrome and Safari)*/
@@ -120,10 +124,16 @@ p {
 
 form {
   position: relative;
-  width: 25rem;
-  margin-top: 12vh;
 }
 
+@media screen and (max-width: 768px) {
+  form {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+
+}
 .chosen-value, .value-list {
   position: absolute;
   top: 0;
@@ -131,16 +141,15 @@ form {
   width: 100%;
 }
 .chosen-value {
-  font-family: 'Ek Mukta';
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 4px;
-  height: 4rem;
-  font-size: 1.1rem;
-  padding: 1rem;
-  background-color: #FAFCFD;
-  border: 3px solid transparent;
-  transition: 0.3s ease-in-out;
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #000;
+  padding: 15px 32px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
 }
 .chosen-value::-webkit-input-placeholder {
   color: #333;
@@ -153,6 +162,7 @@ form {
   color: #333;
 }
 .chosen-value:focus, .chosen-value.open {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
   outline: 0;
   background-color: #2912f7;
   color: #000;
@@ -163,13 +173,14 @@ form {
 .value-list {
   list-style: none;
   margin-top: 4rem;
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   max-height: 0;
   transition: 0.3s ease-in-out;
-  padding: 0rem;
+  position: absolute;
 }
 .value-list.open {
-  max-height: 40rem;
+  max-height: 320px;
   overflow: auto;
 }
 .value-list li {
@@ -194,7 +205,6 @@ form {
   padding: 0;
   opacity: 0;
 }
-
 
 /* ==== USER CSS ==== */
 
@@ -307,66 +317,6 @@ a {
   font-family: 'Times New Roman';
 }
 
- /* The container must be positioned relative: */
-.custom-select {
-  position: relative;
-  font-family: Arial;
-}
-
-.custom-select select {
-  display: none; /*hide original SELECT element: */
-}
-
-.select-selected {
-  background-color: DodgerBlue;
-}
-
-/* Style the arrow inside the select element: */
-.select-selected:after {
-  position: absolute;
-  content: "";
-  top: 14px;
-  right: 10px;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
-}
-
-/* Point the arrow upwards when the select box is open (active): */
-.select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
-  top: 7px;
-}
-
-/* style the items (options), including the selected item: */
-.select-items div,.select-selected {
-  color: #ffffff;
-  padding: 8px 16px;
-  border: 1px solid transparent;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  cursor: pointer;
-}
-
-/* Style items (options): */
-.select-items {
-  position: absolute;
-  background-color: DodgerBlue;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 99;
-}
-
-/* Hide the items when the select box is closed: */
-.select-hide {
-  display: none;
-}
-
-.select-items div:hover, .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
 .hide {
   display: none;
 }
@@ -380,7 +330,6 @@ a {
 }
 
 .row {
-  position: relative;
   width: 100%;
 }
 
@@ -462,6 +411,7 @@ a {
 .hidden-sm {
   display: none;
 }
+
 
 @media only screen and (min-width: 45em) {  /* 720px */
   .container {
