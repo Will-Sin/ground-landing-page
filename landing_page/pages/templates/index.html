@@ -1,29 +1,34 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'simple-grid.css' %}">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+ <!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="simple-grid.css">
+
+
+<script>
+</script>
+<body>
 
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <img class="cave-img" src="{% static 'images/cave.png' %}">
+            <img class="cave-img" src="images/cave.png">
         </div>
     </div>
     <div class="row">
         <div class="col-8" style="margin-bottom: 0%;">
-            <h2>WELCOME TO THE ORACLE TEXT</h2>
+            <h2>WELCOME TO THE ORACLE TEXT</h1>
             <h4>TEXT TO INTRODUCE GROUND. That’s the tragedy! He didn’t say anything. And I didn’t say anything to him. We just looked at each other. I was going to put something in his mouth. But I didn’t. I only put something in yours. I put my arm out. I sat on it. It was my arm. I put my arm in your mouth. It was my arm. I think he’s gone into the SEA  and that’s why he’s gone. He’s fallen into the sea. </h4>
             <br>
             <h4 class="input-header-desktop"><i>Select the scenario you've just finished or select "0" to interact with the Oracle before playing:</i></h4>
             <h4 class="cave-scenario-error hide">Please make sure to select a valid CAVE and Scenario ID.</h4>
         </div>
         <div class="col-4" style="margin-bottom: 0%;">
-            <img class="lunar-phases-img" src="{% static 'images/lunar-phases.png' %}">
-            <img class="mini-moon-img" src="{% static 'images/mini-moon.png' %}">
+            <img class="lunar-phases-img" src="images/lunar-phases.png">
+            <img class="mini-moon-img" src="images/mini-moon.png">
         </div>
     </div>
 
     <div class="row">
-        <div class="col-2">
+        <div class="col-3">
             <form>
                 <input
                   class="chosen-value"
@@ -32,7 +37,6 @@
                   placeholder="CAVE SELECT"
                 />
                 <ul class="value-list">
-                  <!-- List of tech giants -->
                   <li>GREEN</li>
                   <li>BEAUTY</li>
                   <li>RAGE</li>
@@ -43,17 +47,27 @@
                 </ul>
               </form>
         </div>
-        <div class="col-2">
-            <select id="scenario_select">
-                <option value="0">SCENARIO SELECT</option>
-                <option value="1">0</option>
-                <option value="2">1</option>
-                <option value="3">2</option>
-                <option value="4">3</option>
-            </select>
+        <div class="col-3">
+            <form>
+                <input
+                  class="chosen-value"
+                  type="text"
+                  value=""
+                  placeholder="SCENARIO SELECT"
+                />
+                <ul class="value-list">
+                  <li>INTRO</li>
+                  <li>1</li>
+                  <li>2</li>
+                  <li>3</li>
+                </ul>
+              </form>
         </div>
         <div class="col-4">
-            <input class="book-id" value="O7FAU" placeholder="Enter your Book Number...">
+            <form>
+                <input class="book-id" value="O7FAU" placeholder="Enter your Book Number...">    
+            </form>
+            
             </input>
         </div>
     </div>
@@ -95,7 +109,7 @@
             <button class="button start-recording-button">RECORD YOUR NOTE</button>
             <button class="button stop-recording-button hide">STOP RECORDING</button>
         </div>
-
+        
         <div class="col-3">
             <button class="button cancel-recording-button hide">CANCEL</button>
             <button class="button send-recording-button hide">SEND VOICE NOTE</button>
@@ -134,7 +148,6 @@
         <div class="col-12 console"></div>
     </div>
 
-
     <div class="row" id="footer-row">
         <div class="col-10"></div>
         <div class="col-2">
@@ -142,6 +155,8 @@
         </div>
     </div>
 </div>
+<script src="main.js"></script>
+<script src="recorder.js"></script>
 
-<script src="{% static 'recorder.js' %}"></script>
-<script src="{% static 'main.js' %}"></script>
+</body>
+</html> 
