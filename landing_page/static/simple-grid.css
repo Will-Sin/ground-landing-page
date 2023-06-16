@@ -29,12 +29,14 @@ input,
 select,
 textarea,
 button {
-  -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   background-color: transparent;
   border: none;
   outline: none;
+  -webkit-appearance: none; /* Remove iOS styling */
+  border-radius: 0; /* Reset border radius */
+  box-shadow: none; /* Remove box shadow */
 }
 
 /* UNIVERSAL */
