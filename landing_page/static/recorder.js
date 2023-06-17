@@ -81,9 +81,10 @@ function interactionCalculator(response_object) {
 **/
     messageBoxDiv[0].classList.add("hide");
     messageBoxDiv[1].classList.add("hide");
-/**
+
     return 0
   } else {
+ /**
     recorderDiv[0].classList.add("hide");
     recorderDiv[1].classList.add("hide");
 **/
