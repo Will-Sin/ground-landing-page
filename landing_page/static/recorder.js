@@ -3,26 +3,30 @@
 //none
 // import { sendChat } from 'main.js';
 
-var test_url = 'http://127.0.0.1:8000/api';
-var dev_url = ""
+var devURL = 'http://127.0.0.1:8000/api';
+var productionURL = 'https://nftjoseph.pythonanywhere.com/api';
 
-var scenario_select = document.getElementById("scenario_select");
+var scenarioSelectInput = document.getElementsByClassName("chosen-value")[1];
+var caveSelectInput = document.getElementsByClassName("chosen-value")[0];
 var sendButton = document.getElementsByClassName("send-text-message")[0];
-var inputField = document.getElementById("text-input");
-var bookID = document.getElementsByClassName("book-id")[0];
+var inputField = document.getElementsByClassName("text-input")[0];
+var bookIDObject = document.getElementsByClassName("book-id")[0];
 var recorderDiv = document.getElementsByClassName("recorder-div");
 var messageBoxDiv = document.getElementsByClassName("message-box-div");
 var interactionsCountDiv = document.getElementsByClassName("interactions")[0];
+var caveAndScenarioErrorDiv = document.getElementsByClassName("cave-scenario-error")[0];
+var consoleDiv = document.getElementsByClassName("console")[0];
+
 var interactionsCount;
 var scenario_id;
 var user_cave;
+var bookID;
+var scenarioSlect = document.getElementById("scenario_select");
+var caveSelect = document.getElementById("cave_select");
 window.chat_history = ""
 
 // Listen to the send button for text chat
 sendButton.onclick = sendChat;
-
-// Listen to Scenario Selector
-scenario_select.onchange = scenarioSelect;
 
 /** Takes a text input and user name to then post the chat repsonse into the DOM*/
 function update_DOM(input, user) {
@@ -42,7 +46,7 @@ function interactionCalculator(response_object) {
 
   console.log(interactionsCount)
 
-  if (interactionsCount == 0) {
+  if (interactionsCount <= 0) {
     recorderDiv[0].classList.remove("hide");
     recorderDiv[1].classList.remove("hide");
 
@@ -54,7 +58,7 @@ function interactionCalculator(response_object) {
     recorderDiv[0].classList.add("hide");
     recorderDiv[1].classList.add("hide");
 
-    messageBoxDiv[0].classList.remove("hide");
+    messageBoxDiv[0]
     messageBoxDiv[1].classList.remove("hide");
 
     interactionsCountDiv.innerHTML = `<i>You now can ask <b>${interactionsCount}</b> questions to the Oracle. After those are up, you'll need to wait until the next scenario.</i>`
@@ -63,43 +67,54 @@ function interactionCalculator(response_object) {
   };
 };
 
+/***/
+function caveAndScenarioCheck(cave, scenario) {
+
+    if (cave === "" || scenario === "") {
+        caveAndScenarioErrorDiv.classList.remove("hide");
+        return 0
+    } else {
+        caveAndScenarioErrorDiv.classList.add("hide");
+        return 1
+    }
+}
+
+/***/
+function caveAndScenarioSetVariables() {
+
+    scenario_id = scenarioSelectInput.value;
+    user_cave = caveSelectInput.value;
+    bookID = bookIDObject.value;
+
+    return caveAndScenarioCheck(user_cave, scenario_id)
+}
+
 
 /** A fetch function that sends inputed text to the Oracle Endpoint and returns its response*/
 async function fetchChat(user_input, chat_history) {
 
-  var ss = document.getElementById("scenario_select");
-  scenario_id = ss.options[ss.selectedIndex].text;
-  var cs = document.getElementById("cave_select");
-  user_cave = cs.options[cs.selectedIndex].text;
-  bookID = bookID.value;
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-
-  var raw = JSON.stringify({
-  "book": {
-    "current_inquiry": String(user_input),
-    "chat_history": String(chat_history)
+    var raw = JSON.stringify({
+    "book": {
+        "current_inquiry": String(user_input),
+        "chat_history": String(chat_history)
     }
-  });
+    });
 
-  var requestOptions = {
-    method: 'PUT',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-  };
+    var requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
 
-  return fetch(`${test_url}/book/${bookID}/${user_cave}/${scenario_id}/`, requestOptions)
+    return fetch(`${productionURL}/book/${bookID}/${user_cave}/${scenario_id}/`, requestOptions)
 };
 
 /** A fetch function that sends the inputed scenario ID and returns whether there is a script to post or not*/
-async function fetchScript(scenario_id) {
-  var ss = document.getElementById("scenario_select");
-  scenario_id = ss.options[ss.selectedIndex].text;
-  var cs = document.getElementById("cave_select");
-  user_cave = cs.options[cs.selectedIndex].text;
-  bookID = bookID.value;
+async function fetchScript() {
 
   console.log(scenario_id, user_cave)
 
@@ -119,7 +134,7 @@ async function fetchScript(scenario_id) {
     redirect: 'follow'
   };
 
-  return fetch(`${test_url}/script/${bookID}/${user_cave}/${scenario_id}/`, requestOptions)
+  return fetch(`${productionURL}/script/${bookID}/${user_cave}/${scenario_id}/`, requestOptions)
 };
 
 /** Called once the send button is clicked and sends the inputed text to the fetch function that calls the Oracle Endpoint*/
@@ -146,9 +161,16 @@ async function sendChat() {
 
 
 /** Called once the scenario is changed or selected, and checks if there needs to be script for the Oracle or not*/
-async function scenarioSelect() {
+async function scenarioVerify() {
+
+    let check = await caveAndScenarioSetVariables()
+
+    if (check === 0) {
+        return
+    }
+
     let oracle_name = "Oracle";
-    scenario_id = scenario_select.options[scenario_select.selectedIndex].text;
+
     const res = await fetchScript(scenario_id);
 
     response_object = await res.json();
@@ -158,12 +180,57 @@ async function scenarioSelect() {
       if (response != "no script needed") {
         window.chat_history = response;
         console.log(response_object);
+        consoleDiv.innerHTML = JSON.stringify(response_object)
       } else {
         console.log(response_object);
+        consoleDiv.innerHTML = JSON.stringify(response_object)
       }
     }
 
+    consoleDiv.innerHTML = JSON.stringify(response_object)
+
     interactionCalculator(response_object)
+
+    if (response !== "no script needed") {
+        update_DOM(response, oracle_name);
+    }
+
+};
+
+/** Called once the scenario is changed or selected, and checks if there needs to be script for the Oracle or not*/
+async function caveVerify() {
+
+    let check = await caveAndScenarioSetVariables()
+
+    if (check === 0) {
+        return
+    }
+
+    let oracle_name = "Oracle";
+
+    const res = await fetchScript();
+
+    response_object = await res.json();
+    response = response_object["scenario_script"];
+
+    if (response != "400") {
+      if (response != "no script needed") {
+        window.chat_history = response;
+        console.log(response_object);
+        consoleDiv.innerHTML = JSON.stringify(response_object)
+      } else {
+        console.log(response_object);
+        consoleDiv.innerHTML = JSON.stringify(response_object)
+      }
+    }
+
+    consoleDiv.innerHTML = JSON.stringify(response_object)
+
+    interactionCalculator(response_object)
+
+    if (response !== "no script needed") {
+        update_DOM(response, oracle_name);
+    }
 
 };
 
@@ -650,13 +717,15 @@ var audioRecorder = {
         formData.append('file', new File(audioRecorder.audioBlobs, 'recording.wav'));
 
         // console.log(formData);
+        // consoleDiv.innerHTML = JSON.stringify(formData)
 
-        fetch(`${test_url}/upload/${bookID}/${user_cave}/${scenario_id}/`, {
+        fetch(`${productionURL}/upload/${bookID}/${user_cave}/${scenario_id}/`, {
             method: 'POST',
             body: formData
         })
         .then(response => {
             if (!response.ok) {
+              consoleDiv.innerHTML = 'Network response was not ok'
               throw new Error('Network response was not ok');
             }
 
@@ -664,11 +733,10 @@ var audioRecorder = {
         })
         .then(data => {
             console.log('Server response:', data);
+            consoleDiv.innerHTML = JSON.stringify(data)
             var binary = interactionCalculator(data);
 
-            if (binary == 0) {
-                update_DOM(data["gpt response"], "Oracle:");
-            };
+            update_DOM(data["gpt response"], "Oracle:");
         })
 
     },
