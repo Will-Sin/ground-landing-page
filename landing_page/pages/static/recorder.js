@@ -28,31 +28,6 @@ window.chat_history = ""
 // Listen to the send button for text chat
 sendButton.onclick = sendChat;
 
-// Loop through each dropdown
-dropdowns.forEach((dropdown, index) => {
-  const inputField = inputFields[index];
-  const dropdownArray = [...dropdown.querySelectorAll('li')];
-
-  // Rest of your existing dropdown code...
-
-  dropdownArray.forEach(item => {
-    item.addEventListener('click', () => {
-      inputField.value = item.textContent;
-      dropdown.classList.remove('open');
-      // Trigger scenario verification when a list item is clicked
-      if (inputField === scenarioSelectInput) {
-        scenarioVerify();
-      }
-      // Trigger cave verification when a list item is clicked
-      if (inputField === caveSelectInput) {
-        caveVerify();
-      }
-    });
-  });
-
-  // Rest of your existing dropdown code...
-});
-
 /** Takes a text input and user name to then post the chat repsonse into the DOM*/
 function update_DOM(input, user) {
   const chatDiv = document.getElementById("chat_box");
