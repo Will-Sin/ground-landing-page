@@ -75,21 +75,21 @@ function interactionCalculator(response_object) {
 
     interactionsCountDiv.innerHTML = `<i>You have no more interactions with the Oracle. SORRY!</i>`
 
-    /**
+/**
     recorderDiv[0].classList.remove("hide");
     recorderDiv[1].classList.remove("hide");
-
+**/
     messageBoxDiv[0].classList.add("hide");
     messageBoxDiv[1].classList.add("hide");
-
+/**
     return 0
   } else {
     recorderDiv[0].classList.add("hide");
     recorderDiv[1].classList.add("hide");
-
+**/
     messageBoxDiv[0]
     messageBoxDiv[1].classList.remove("hide");
-**/
+
 
     interactionsCountDiv.innerHTML = `<i>You now can ask <b>${interactionsCount}</b> questions to the Oracle. After those are up, you'll need to wait until the next scenario.</i>`
 
