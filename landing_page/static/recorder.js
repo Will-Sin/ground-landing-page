@@ -275,6 +275,8 @@ async function caveVerify() {
 //
 
 //View
+
+/**
 var microphoneButton = document.getElementsByClassName("start-recording-button")[0];
 var stopRecordingButton = document.getElementsByClassName("stop-recording-button")[0];
 var cancelRecordingButton = document.getElementsByClassName("cancel-recording-button")[0];
@@ -285,7 +287,7 @@ var overlay = document.getElementsByClassName("overlay")[0];
 var audioElement = document.getElementsByClassName("audio-element")[0];
 var audioElementSource = document.getElementsByClassName("audio-element")[0]
     .getElementsByTagName("source")[0];
-
+**/
 
 //Listeners
 
