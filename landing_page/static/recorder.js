@@ -13,7 +13,7 @@ var inputField = document.getElementsByClassName("text-input")[0];
 var bookIDObject = document.getElementsByClassName("book-id")[0];
 //var recorderDiv = document.getElementsByClassName("recorder-div");
 var messageBoxDiv = document.getElementsByClassName("message-box-div");
-//var interactionsCountDiv = document.getElementsByClassName("interactions")[0];
+var interactionsCountDiv = document.getElementsByClassName("interactions")[0];
 var caveAndScenarioErrorDiv = document.getElementsByClassName("cave-scenario-error")[0];
 var consoleDiv = document.getElementsByClassName("console")[0];
 
