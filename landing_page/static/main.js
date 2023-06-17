@@ -7,6 +7,9 @@ dropdowns.forEach((dropdown, index) => {
   const inputField = inputFields[index];
   const dropdownArray = [...dropdown.querySelectorAll('li')];
 
+  // Set the input field as readonly
+  inputField.readOnly = true;
+
   let valueArray = [];
   dropdownArray.forEach(item => {
     valueArray.push(item.textContent);
@@ -52,7 +55,6 @@ dropdowns.forEach((dropdown, index) => {
   });
 
   inputField.addEventListener('focus', () => {
-    inputField.placeholder = 'Type to filter';
     dropdown.classList.add('open');
     dropdownArray.forEach(dropdown => {
       dropdown.classList.remove('closed');

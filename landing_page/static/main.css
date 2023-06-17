@@ -1,0 +1,339 @@
+/* ==== CUSTOM FONTS ==== */
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic);
+
+@font-face {
+    font-family: 'HelveticaNowDisplay';
+    src: url('fonts/HelveticaNowDisplay-Regular.woff2') format('woff2'),
+        url('fonts/HelveticaNowDisplay-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Times New Roman';
+    src: url('fonts/TimesNewRomanPSMT.woff2') format('woff2'),
+        url('fonts/TimesNewRomanPSMT.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ==== IOS CSS Removal ==== */
+
+input,
+select,
+textarea,
+button {
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  -webkit-appearance: none; /* Remove iOS styling */
+  border-radius: 0; /* Reset border radius */
+  box-shadow: none; /* Remove box shadow */
+}
+
+/* DROP DOWN */
+
+form {
+  position: relative;
+}
+  
+}
+.chosen-value, .value-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.chosen-value {
+
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #000;
+  padding: 15px 32px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+}
+.chosen-value::-webkit-input-placeholder {
+  color: #333;
+}
+.chosen-value:hover {
+  background-color: black;
+  color: white;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.chosen-value:hover::-webkit-input-placeholder {
+  color: #333;
+}
+.chosen-value:focus, .chosen-value.open {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
+  background-color: black;
+  color: white;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.chosen-value:focus::-webkit-input-placeholder, .chosen-value.open::-webkit-input-placeholder {
+  color: #000;
+}
+.value-list {
+  font-size: 1rem;
+  /*display: none;*/
+  list-style: none;
+  margin-top: 4rem;
+  overflow: hidden;
+  max-height: 0;
+  transition: 0.3s ease-in-out;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  border: 1px solid #000;
+  animation-duration: 0.5s;
+  animation-name: animate-fade;
+  animation-fill-mode: backwards;
+}
+
+@keyframes animate-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.value-list.open {
+  max-height: 320px;
+  overflow: auto;
+  display: block;
+  transition: 0.5s;
+}
+.value-list li {
+  position: relative;
+  height: 2rem;
+  background-color: #FAFCFD;
+  padding: 1rem;
+  padding-left: 2rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  opacity: 1;
+}
+.value-list li:hover {
+  background-color: black;
+  color: white;
+  transition: 0.5s;
+}
+.value-list li.closed {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+  opacity: 0;
+}
+
+.button {
+  background-color: white;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.button:active {
+  background-color: grey;
+  color: white;
+  transition: 0.5s;
+}
+
+input {
+  font-size: 1rem;
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #000;
+  padding: 15px 32px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+input:focus {
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #000;
+  padding: 15px 32px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+textarea {
+  font-family:Times New Roman;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #000;
+  resize: none;
+}
+
+/* ==== MEDIA QUERIES ==== */
+
+/*
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+
+  /* CSS */
+
+}
+
+/*
+  ##Device = Laptops, Desktops, tablets
+  ##Screen = B/w 720px to 1280px
+*/
+
+@media (min-width: 720px) {
+
+  .cave-img {
+    max-width: 100%;
+    margin-top: -2%;
+  }
+
+  .lunar-phases-img {
+    visibility: visible;
+    max-width: 100%;
+    margin-top: 4.5rem;
+    margin-left: 3rem;
+    position: relative;
+  }
+
+  .mini-moon-img {
+    visibility: hidden;
+    margin-bottom: 3rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+  }
+
+  textarea {
+
+  }
+
+  .button {
+
+  }
+
+
+  .input-header-desktop {
+      visibility: visible;
+      position: relative;
+    }
+
+  #input-header-mobile {
+    visibility: hidden;
+    position: absolute;
+    margin-bottom: 0%;
+  }
+
+  #footer-row {
+      padding-top: 5%;
+    }
+
+}
+
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (max-width:  767px) {
+
+  form {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+
+  .cave-img {
+    max-width: 100%;
+    margin-top: -2%;
+    object-fit: cover;
+    height: 13rem;
+  }
+
+  .lunar-phases-img {
+    visibility: hidden;
+    max-width: 100%;
+    margin-top: 4.5rem;
+    margin-left: 3rem;
+    position: absolute;
+  }
+
+  .mini-moon-img {
+    visibility: visible;
+    margin-bottom: 3rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 2rem;
+  }
+
+
+  textarea {
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .button {
+    display: flex;
+    margin: 0 auto;
+    position: relative;
+  }
+
+
+
+  .input-header-desktop {
+      visibility: hidden;
+      position: relative;
+    }
+
+  #input-header-mobile {
+    visibility: visible;
+    position: absolute;
+    margin-bottom: 0%;
+  }
+
+  #footer-row {
+    padding-top: 0%;
+    top: 0;
+  }
+  
+}
