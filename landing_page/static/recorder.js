@@ -87,7 +87,7 @@ function interactionCalculator(response_object) {
     recorderDiv[0].classList.add("hide");
     recorderDiv[1].classList.add("hide");
 **/
-    messageBoxDiv[0]
+    messageBoxDiv[0].classList.remove("hide");
     messageBoxDiv[1].classList.remove("hide");
 
 
