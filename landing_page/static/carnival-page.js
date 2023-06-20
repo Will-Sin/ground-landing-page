@@ -29,7 +29,7 @@ function checkInputLength() {
     console.log('Four characters entered!');
 
     bookError.classList.remove("hide");
-    interactionVerify()
+    interactionVerify(value)
     // You can add more code or call another function
   }
 
@@ -145,7 +145,7 @@ async function sendChat() {
 
 
 /** Called once the scenario is changed or selected, and checks if there needs to be script for the Oracle or not*/
-async function interactionVerify() {
+async function interactionVerify(bookID) {
 
     let oracle_name = "Oracle";
 
