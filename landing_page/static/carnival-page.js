@@ -97,7 +97,7 @@ async function fetchChat(user_input, chat_history) {
 };
 
 /** A fetch function that sends the inputed scenario ID and returns whether there is a script to post or not*/
-async function fetchScript() {
+async function fetchScript(bookID) {
 
   console.log("Book ID:" + bookID)
 
@@ -149,7 +149,7 @@ async function interactionVerify() {
 
     let oracle_name = "Oracle";
 
-    const res = await fetchScript(scenario_id);
+    const res = await fetchScript(bookID);
 
     response_object = await res.json();
 
