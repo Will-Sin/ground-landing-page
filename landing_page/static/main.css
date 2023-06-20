@@ -36,12 +36,19 @@ button {
   box-shadow: none; /* Remove box shadow */
 }
 
+/* CUSTOM Text */
+
+.oracle-response {
+  display: flex;
+  text-align: center;
+}
+
 /* DROP DOWN */
 
 form {
   position: relative;
 }
-  
+
 }
 .chosen-value, .value-list {
   position: absolute;
@@ -100,11 +107,6 @@ form {
   animation-fill-mode: backwards;
 }
 
-@keyframes animate-fade {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
 .value-list.open {
   max-height: 320px;
   overflow: auto;
@@ -135,6 +137,8 @@ form {
   padding: 0;
   opacity: 0;
 }
+
+/** Buttons and Inputs **/
 
 .button {
   background-color: white;
@@ -190,6 +194,19 @@ textarea {
   display: inline-block;
   border: 1px solid #000;
   resize: none;
+}
+
+/* Animations */
+
+.fade-in {
+  animation-duration: 0.5s;
+  animation-name: animate-fade;
+  animation-fill-mode: backwards;
+}
+
+@keyframes animate-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 /* ==== MEDIA QUERIES ==== */

@@ -57,9 +57,10 @@ dropdowns.forEach((dropdown, index) => {
 function update_DOM(input, user) {
   const chatDiv = document.getElementById("chat_box");
   let textP = document.createElement("p");
-  textP.className = "clear"
+  textP.className = "oracle-response"
   textP.className = "fade-in"
-  textP.innerHTML = `${user}: ${input}<br>`;
+  //textP.innerHTML = `${user}: ${input}<br>`;
+  textP.innerHTML = `${input}<br>`;
   textP.classList.remove("clear");
   chatDiv.appendChild(textP);
 
@@ -177,7 +178,7 @@ async function sendChat() {
 
     console.log(inputField.value);
 
-    update_DOM(user_input, user_name);
+    //update_DOM(user_input, user_name);
 
     const res = await fetchChat(user_input, chat_history);
 
@@ -274,5 +275,5 @@ async function caveVerify() {
 //
 //
 //
-//
+// All the code below this has been removed and in an archive for when testing the voice notes comes back into the docket.
 
