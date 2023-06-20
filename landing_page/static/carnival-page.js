@@ -12,6 +12,7 @@ var bookIDObject = document.getElementsByClassName("book-id")[0];
 var messageBoxDiv = document.getElementsByClassName("message-box-div");
 var interactionsCountDiv = document.getElementsByClassName("interactions")[0];
 var consoleDiv = document.getElementsByClassName("console")[0];
+var bookError = document.getElementsByClassName("book-error")[0];
 
 var interactionsCount;
 var bookID;
@@ -27,12 +28,12 @@ function checkInputLength() {
     // Perform your desired action here
     console.log('Four characters entered!');
 
-    caveAndScenarioErrorDiv.classList.remove("hide");
+    bookError.classList.remove("hide");
     interactionVerify()
     // You can add more code or call another function
   }
 
-  caveAndScenarioErrorDiv.classList.add("hide");
+  bookError.classList.add("hide");
 }
 
 /** Takes a text input and user name to then post the chat repsonse into the DOM*/
