@@ -23,29 +23,40 @@
         </div>
     </div>
 
-    <div class="row chat_box_row hide">
+    <div class="row">
+        <div class="col-4">
+            <form>
+                <input class="book-id" placeholder="Enter your Book Number..." oninput="checkInputLength()">
+            </form>
+
+            </input>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-2"></div>
-        <div class="col-8 chat_box fade-in" id="chat_box">
+        <div class="col-8 chat_box" id="chat_box">
+            <p>And I didn’t say anything to him. We just looked at each other. I was going to put something in his mouth. But I didn’t. I only put something in yours. I put my arm out. I sat on it. It was my arm. I put my arm in your mouth. It was my arm. I think he’s gone into the SEA and that’s why he’s gone. He’s fallen into the sea. </p>
         </div>
         <div class="col-2"></div>
     </div>
 
-    <div class="row error-interactions hide">
+    <div class="row message-box-div hide">
+        <div class="col-12">
+            <h4 class="interactions"></h4>
+        </div>
         <div class="col-2" id="input-header-mobile">
             <h4><i>You are out of questions...</i></h4>
         </div>
-        <div class="col-2" class="input-header-desktop">
-            <h4><i>You are out of questions...</i></h4>
+    </div>
+
+    <div class="row book-verify-box hide">
+        <div class="col-2" id="input-header-mobile">
+            <h4><i>Book is Invalid</i></h4>
         </div>
     </div>
 
-    <div class="row interactions hide">
-        <div class="col-12">
-            <h4 class="interactions-text"></h4>
-        </div>
-    </div>
-
-    <div class="row message-box hide">
+    <div class="row message-box-div hide">
         <div class="col-6">
             <textarea id="text-input" class="text-input" rows="4" placeholder="Enter text here..."></textarea>
         </div>
@@ -53,51 +64,6 @@
             <button class="send-text-message button">SEND YOUR MESSAGE</button>
         </div>
         <div class="col-2"></div>
-    </div>
-
-    <div class="row">
-        <div class="col-3">
-            <form>
-                <input
-                  class="chosen-value"
-                  type="text"
-                  value=""
-                  placeholder="CAVE SELECT"
-                />
-                <ul class="value-list">
-                  <li>GREEN</li>
-                  <li>BEAUTY</li>
-                  <li>RAGE</li>
-                  <li>BODY</li>
-                  <li>FAITH</li>
-                  <li>KNOWLEDGE</li>
-                  <li>DISORDER</li>
-                </ul>
-              </form>
-        </div>
-        <div class="col-3">
-            <form>
-                <input
-                  class="chosen-value"
-                  type="text"
-                  value=""
-                  placeholder="SCENARIO SELECT"
-                />
-                <ul class="value-list">
-                  <li>0</li>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-                </ul>
-              </form>
-        </div>
-        <div class="col-4">
-            <form>
-                <input class="book-id" placeholder="Enter your Book Number..." oninput="checkInputLength(1)">
-            </form>
-
-            </input>
-        </div>
     </div>
 
     <div class="row">

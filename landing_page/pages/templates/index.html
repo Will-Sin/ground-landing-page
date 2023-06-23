@@ -23,6 +23,38 @@
         </div>
     </div>
 
+    <div class="row chat_box_row hide">
+        <div class="col-2"></div>
+        <div class="col-8 chat_box fade-in" id="chat_box">
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+    <div class="row error-interactions hide">
+        <div class="col-2" id="input-header-mobile">
+            <h4><i>You are out of questions...</i></h4>
+        </div>
+        <div class="col-2" class="input-header-desktop">
+            <h4><i>You are out of questions...</i></h4>
+        </div>
+    </div>
+
+    <div class="row interactions hide">
+        <div class="col-12">
+            <h4 class="interactions-text"></h4>
+        </div>
+    </div>
+
+    <div class="row message-box hide">
+        <div class="col-6">
+            <textarea id="text-input" class="text-input" rows="4" placeholder="Enter text here..."></textarea>
+        </div>
+        <div class="col-4">
+            <button class="send-text-message button">SEND YOUR MESSAGE</button>
+        </div>
+        <div class="col-2"></div>
+    </div>
+
     <div class="row">
         <div class="col-3">
             <form>
@@ -52,7 +84,7 @@
                   placeholder="SCENARIO SELECT"
                 />
                 <ul class="value-list">
-                  <li>INTRO</li>
+                  <li>0</li>
                   <li>1</li>
                   <li>2</li>
                   <li>3</li>
@@ -61,93 +93,16 @@
         </div>
         <div class="col-4">
             <form>
-                <input class="book-id" value="O7FAU" placeholder="Enter your Book Number..."/>
+                <input class="book-id" placeholder="Enter your Book Number..." oninput="checkInputLength(1)">
             </form>
 
-
+            </input>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8 chat_box" id="chat_box"></div>
-        <div class="col-2"></div>
-    </div>
-
-<!--
-
-    <div class="row">
-        <div class="col-12">
-            <div class="overlay hide">
-                <div class="browser-not-supporting-audio-recording-box">
-                    <p>To record audio, use browsers like Chrome and Firefox that support audio recording.</p>
-                    <button type="button" class="close-browser-not-supported-box">Ok.</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row recorder-div hide">
-        <div class="col-12">
-            <h4 class="voice-note-header"><i>You must record a message for the Oracle to be granted three questions.</i></h4>
-        </div>
-        <div class="col-2" id="input-header-mobile">
-            <h4><i>You must record a message for the Oracle to be granted three questions.</i></h4>
-        </div>
-        <div class="overlay hide">
-            <div class="browser-not-supporting-audio-recording-box">
-            <p>To record audio, use browsers like Chrome and Firefox that support audio recording.</p>
-            <button type="button" class="close-browser-not-supported-box">Ok.</button>
-        </div>
-        </div>
-    </div>
-
-    <div class="row recorder-div hide">
-        <div class="col-3">
-            <button class="button start-recording-button">RECORD YOUR NOTE</button>
-            <button class="button stop-recording-button hide">STOP RECORDING</button>
-        </div>
-
-        <div class="col-3">
-            <button class="button cancel-recording-button hide">CANCEL</button>
-            <button class="button send-recording-button hide">SEND VOICE NOTE</button>
-        </div>
-        <div class="col-2">
-            <div class="recording-elapsed-time">
-                <p class="elapsed-time"></p>
-            </div>
-        </div>
-        <div>
-            <audio controls class="audio-element hide"></audio>
-        </div>
-    </div>
-
-    -->
-
-    <div class="row message-box-div hide">
-        <div class="col-12">
-            <h4 class="interactions"></h4>
-        </div>
-<!--        <div class="col-2" id="input-header-mobile">
-            <h4><i>Record your message to be granted access to the Oracle.</i></h4>
-        </div>
-    -->
-    </div>
-
-    <div class="row message-box-div hide">
-        <div class="col-6">
-            <textarea id="text-input" class="text-input" rows="4" placeholder="Enter text here..."></textarea>
-        </div>
-        <div class="col-4">
-            <button class="send-text-message button">SEND YOUR MESSAGE</button>
-        </div>
-        <div class="col-2"></div>
     </div>
 
     <div class="row">
         <div class="col-12 console"></div>
     </div>
-
 
     <div class="row" id="footer-row">
         <div class="col-10"></div>
