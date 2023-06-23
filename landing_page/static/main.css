@@ -38,8 +38,7 @@ button {
 
 /* CUSTOM Text */
 
-.oracle-response {
-  display: flex;
+.chat_box {
   text-align: center;
 }
 
