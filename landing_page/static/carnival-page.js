@@ -326,7 +326,6 @@ async function caveVerify() {
     }
 
     //consoleDiv.innerHTML = JSON.stringify(response_object)
-    //consoleDiv.innerHTML = JSON.stringify(response_object)
 
     if (bookVerify(response_object)) {
       console.log("error 3")

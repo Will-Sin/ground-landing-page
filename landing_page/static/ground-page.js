@@ -10,7 +10,7 @@ var caveSelectInput = document.getElementsByClassName("chosen-value")[0];
 var sendButton = document.getElementsByClassName("send-text-message")[0];
 var inputField = document.getElementsByClassName("text-input")[0];
 var bookIDObject = document.getElementsByClassName("book-id")[0];
-var consoleDiv = document.getElementsByClassName("console")[0];
+//var consoleDiv = document.getElementsByClassName("console")[0];
 
 // Hidden divs
 
@@ -236,13 +236,13 @@ async function BookAndInteractionVerify(bookID) {
 
     response_object = await res.json();
 
-    consoleDiv.innerHTML = JSON.stringify(response_object);
+    //consoleDiv.innerHTML = JSON.stringify(response_object);
     console.log("error 1")
     if (bookVerify(response_object)) {
       console.log("error 3")
       interactionCalculator(response_object)  ;
     }
-    
+
 
 }
 
@@ -257,7 +257,7 @@ async function scenarioVerify() {
 
     if (checkInputLength(0)) {
     } else {
-      
+
       return;
     }
 
@@ -272,14 +272,14 @@ async function scenarioVerify() {
       if (response != "no script needed") {
         window.chat_history = response;
         console.log(response_object);
-        consoleDiv.innerHTML = JSON.stringify(response_object)
+        //consoleDiv.innerHTML = JSON.stringify(response_object)
       } else {
         console.log(response_object);
-        consoleDiv.innerHTML = JSON.stringify(response_object)
+        //consoleDiv.innerHTML = JSON.stringify(response_object)
       }
     }
 
-    consoleDiv.innerHTML = JSON.stringify(response_object)
+    //consoleDiv.innerHTML = JSON.stringify(response_object)
 
     if (bookVerify(response_object)) {
       console.log("error 3")
@@ -296,7 +296,7 @@ async function scenarioVerify() {
 async function caveVerify() {
 
     let check = await caveAndScenarioSetVariables()
-    
+
 
     if (check === 0) {
         return;
@@ -318,14 +318,14 @@ async function caveVerify() {
       if (response != "no script needed") {
         window.chat_history = response;
         console.log(response_object);
-        consoleDiv.innerHTML = JSON.stringify(response_object)
+        //consoleDiv.innerHTML = JSON.stringify(response_object)
       } else {
         console.log(response_object);
-        consoleDiv.innerHTML = JSON.stringify(response_object)
+        //consoleDiv.innerHTML = JSON.stringify(response_object)
       }
     }
 
-    consoleDiv.innerHTML = JSON.stringify(response_object)
+    //consoleDiv.innerHTML = JSON.stringify(response_object)
 
     if (bookVerify(response_object)) {
       console.log("error 3")
