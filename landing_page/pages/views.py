@@ -11,3 +11,6 @@ def indexCarnival(request):
 
 def landingPage(request):
     return render(request, 'landing-page.html')
+
+def testingPage(request):
+    return render(request, 'testing-page.html')
