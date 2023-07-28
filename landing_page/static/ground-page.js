@@ -11,17 +11,33 @@ var sendButton = document.getElementsByClassName("send-text-message")[0];
 var inputField = document.getElementsByClassName("text-input")[0];
 var bookIDObject = document.getElementsByClassName("book-id")[0];
 //var consoleDiv = document.getElementsByClassName("console")[0];
+const ctaDivs = document.querySelectorAll(".row.cta");
+const ctaButton = document.getElementsByClassName("cta")[1];
+const ctaBackButton = document.getElementsByClassName("button-back")[0];
+const ctaStartButton = document.getElementsByClassName("button-start")[0];
+const removableInputSpacers = document.querySelectorAll(".book-input-spacer");
+const tryAgainButton = document.getElementsByClassName("try-again-button")[0];
+const mobileMenuButton = document.getElementsByClassName("mobile-menu-button")[0];
+const leftContainerDiv = document.getElementsByClassName("left-container")[0];
+const footerURL = document.getElementsByClassName("footer-text")[0];
+const productionConsole = document.getElementsByClassName("production-console")[0];
+
+const windowWidth = window.innerWidth;
+
+// Drop Downs
+const inputFields = document.querySelectorAll('.chosen-value');
+const dropdowns = document.querySelectorAll('.value-list');
+const placeholders = ['CAVE SELECT', 'SCENARIO SELECT']; // Add the desired placeholders in the same order as the forms
 
 // Hidden divs
 
-var introBookDiv = document.getElementsByClassName("intro-book")[0];
-var messageBoxDiv = document.getElementsByClassName("message-box");
-var bookErrorDiv = document.getElementsByClassName("error-book")[0];
-var interactionsCountDiv = document.getElementsByClassName("interactions")[0];
-var interactionsCountTextDiv = document.getElementsByClassName("interactions-text")[0];
-var errorInteractionsDiv = document.getElementsByClassName("error-interactions")[0];
-var caveAndScenarioErrorDiv = document.getElementsByClassName("cave-scenario-error")[0];
-var chatBoxRow = document.getElementsByClassName("chat_box_row")[0];
+const messageBoxDiv = document.getElementsByClassName("message-box");
+const bookErrorDiv = document.getElementsByClassName("error-book")[0];
+const interactionsCountTextDiv = document.getElementsByClassName("interactions-text")[0];
+const errorInteractionsDiv = document.getElementsByClassName("error-interactions")[0];
+const caveAndScenarioErrorDiv = document.getElementsByClassName("cave-scenario-error")[0];
+const chatBox = document.getElementsByClassName("chat-box")[0];
+const bookInputs = document.querySelectorAll(".book-inputs.hide");
 
 var interactionsCount;
 var scenario_id;
@@ -33,8 +49,181 @@ var interactionsCount;
 var bookID;
 window.chat_history = ""
 
+/*/ / / / / / / / / /*/
+
+/*/ / / / / / / / / /*/
+
+/*/ / / / / / / / / /*/
+
+const box = document.querySelector('.box');
+const iTag = document.querySelector('i');
+const pTag = document.getElementById('oracle-response');
+const boxHeight = document.offsetHeight;
+const iWidth = iTag.offsetWidth;
+var iHeight;
+var pHeight;
+var counter = 0;
+
+const setBoxHeight = () => {
+  box.style.height = '1000px !important';
+  adjustBoxHeight();
+};
+
+function setWidthAndHeight() {
+  const wordCount = WordCount(pTag.innerHTML);
+  const minWords = 30;
+  const maxWords = 100;
+  const minWidth = 15; // in rem
+  const maxWidth = 40; // in rem
+
+  // Calculate the width based on the word count and the specified range
+  const width = (wordCount <= minWords) ? minWidth :
+    (wordCount >= maxWords) ? maxWidth :
+    minWidth + ((wordCount - minWords) / (maxWords - minWords)) * (maxWidth - minWidth);
+
+  box.style.width = `${width}rem`; // Calculate the width within the range
+}
+
+function WordCount(str) {
+  return str.split(" ").length;
+}
+
+function adjustBoxHeight() {
+  setWidthAndHeight();
+  compareHeights();
+  adjustHeightIfShort();
+  counter = 0;
+}
+
+function compareHeights() {
+  iHeight = iTag.offsetHeight;
+  pHeight = pTag.offsetHeight;
+
+  if (iHeight > pHeight * 1.1 && counter !== 500) {
+    console.log("Frame too tall");
+    console.log(pHeight);
+    console.log(iHeight);
+    box.style.height = `${iHeight - 2}px`;
+    counter++;
+    compareHeights(); // Recursively call compareHeights()
+  }
+}
+
+function adjustHeightIfShort() {
+  iHeight = iTag.offsetHeight;
+  pHeight = pTag.offsetHeight;
+
+  if (iHeight < pHeight && counter !== 500) {
+    console.log("Frame too short");
+    console.log(pHeight);
+    console.log(iHeight);
+    box.style.height = `${iHeight + 2}px`;
+    counter++
+    adjustHeightIfShort(); // Recursively call adjustHeightIfShort()
+  }
+}
+
+/*/ / / / / / / / / /*/
+
+/*/ / / / / / / / / /*/
+
+/*/ / / / / / / / / /*/
+
+/*/ / / / / / / / / /*/
+
+  /**/
+
+ctaStartButton.addEventListener("click", function () {
+
+  // Add removeable spacers if the screen is greater than 1280
+  if (windowWidth > 1280) {
+    removableInputSpacers.forEach(function (col) {
+      col.classList.add("hide");
+    });
+  } else {
+    mobileMenuButton.classList.remove("hide");
+    footerURL.classList.remove("hide");
+  };
+
+  ctaStartButton.innerHTML ="Update";
+
+  const chosenValueInputs = document.querySelectorAll('.chosen-value');
+  let isListValid = true;
+  let isBookValid = true;
+
+  chosenValueInputs.forEach(function (input) {
+    if (input.value.trim() == "") {
+      isListValid = false;
+      caveAndScenarioErrorDiv.classList.remove("hide");
+    }
+  });
+
+  const bookIdInput = document.querySelector('.book-id');
+  const bookIdValue = bookIdInput.value.trim();
+
+  if (bookIdValue.length !== 5) {
+    isBookValid = false;
+    bookErrorDiv.classList.remove("hide");
+  }
+
+  if (isListValid && isBookValid) {
+    bookErrorDiv.classList.add("hide");
+    caveAndScenarioErrorDiv.classList.add("hide");
+    valueVerify();
+
+    // Check if the window width is less than 1280 pixels and then hide the upper (left) pannel.
+    if (windowWidth < 1280) {
+      leftContainerDiv.classList.add("hide");
+    } else {
+      productionConsole.style.maxWidth = "34rem";
+    };
+  }
+});
+
+// On CTA button click, hides CTA elements and shows next divs.
+ctaButton.addEventListener("click", function () {
+  ctaDivs.forEach((item) => {
+    item.classList.add("hide");
+  });
+  bookInputs.forEach((item) => {
+    item.classList.remove("hide");
+  });
+
+  if (windowWidth > 1280) {
+    productionConsole.style.maxWidth = null;
+  };
+});
+
+// On CTA button click, hides CTA elements and shows next divs.
+ctaBackButton.addEventListener("click", function () {
+  ctaDivs.forEach((item) => {
+    item.classList.remove("hide");
+  });
+  bookInputs.forEach((item) => {
+    item.classList.add("hide");
+  });
+
+  removableInputSpacers.forEach(function (col) {
+    col.classList.remove("hide");
+  });
+
+});
+
+// Button to be clicked after recieving a response from the Oracle, and to access the message pannel again.
+tryAgainButton.addEventListener("click", function () {
+  tryAgainButton.classList.add("hide")
+  messageBoxDiv[0].classList.remove("hide")
+  sendButton.classList.remove("hide")
+});
+
 // Listen to the send button for text chat
 sendButton.onclick = sendChat;
+
+// Mobile menu button on click
+mobileMenuButton.addEventListener("click", function () {
+  leftContainerDiv.classList.remove("hide");
+  mobileMenuButton.classList.add("hide");
+});
 
 // Loop through each dropdown
 dropdowns.forEach((dropdown, index) => {
@@ -47,40 +236,10 @@ dropdowns.forEach((dropdown, index) => {
     item.addEventListener('click', () => {
       inputField.value = item.textContent;
       dropdown.classList.remove('open');
-      // Trigger scenario verification when a list item is clicked
-      console.log(scenarioSelectInput)
-      if (inputField === scenarioSelectInput) {
-        scenarioVerify();
-      }
-      // Trigger cave verification when a list item is clicked
-      if (inputField === caveSelectInput) {
-        caveVerify();
-      }
     });
   });
 
 });
-
-function checkInputLength(test) {
-  const value = bookIDObject.value;
-
-  if (value.length === 5) {
-    // Perform your desired action here
-    console.log('Five characters entered!');
-
-    introBookDiv.classList.add("hide");
-    //BookAndInteractionVerify(value)
-    if (test === 1) {
-      scenarioVerify()
-    }
-    return true;
-    // You can add more code or call another function
-  } else {
-    introBookDiv.classList.remove("hide");
-
-    return false;
-  }
-}
 
 function bookVerify(response_object) {
   if (response_object["Book ID"] == "Invalid") {
@@ -98,14 +257,10 @@ function bookVerify(response_object) {
 
 /** Takes a text input and user name to then post the chat repsonse into the DOM*/
 function update_DOM(input, user) {
-  const chatDiv = document.getElementById("chat_box");
-  let textP = document.createElement("p");
-  chatBoxRow.classList.remove("hide");
-  textP.className = "fade-in"
-  textP.innerHTML = `${user}: ${input}<br>`;
-  chatDiv.innerHTML = ""
-  chatDiv.appendChild(textP);
-
+  const textH4 = document.getElementById("oracle-response");
+  textH4.innerHTML = `<span class="highlight stroke-text smooth-16">${user}: ${input}</span>`;
+  chatBox.classList.remove("hide");
+  setBoxHeight()
 };
 
 /** Called once a voice note is sent and determines what do to given how many interactions are returned*/
@@ -117,40 +272,20 @@ function interactionCalculator(response_object) {
   if (interactionsCount <= 0) {
 
     messageBoxDiv[0].classList.add("hide");
-    interactionsCountDiv.classList.remove("hide")
+    messageBoxDiv[1].classList.add("hide");
+    interactionsCountTextDiv.classList.remove("hide")
     interactionsCountTextDiv.innerHTML = `<i>You are out of questions...</i>`;
 
     return 0;
   } else {
 
     messageBoxDiv[0].classList.remove("hide");
-    interactionsCountDiv.classList.remove("hide")
+    messageBoxDiv[1].classList.remove("hide");
+    interactionsCountTextDiv.classList.remove("hide")
     interactionsCountTextDiv.innerHTML = `<i>You now can ask <b>${interactionsCount}</b> questions to the Oracle. After those are up, you'll need a new offering.</i>`;
 
     return 1;
   }
-}
-
-/***/
-function caveAndScenarioCheck(cave, scenario) {
-
-    if (cave === "" || scenario === "") {
-        caveAndScenarioErrorDiv.classList.remove("hide");
-        return 0;
-    } else {
-        caveAndScenarioErrorDiv.classList.add("hide");
-        return 1;
-    }
-}
-
-/***/
-function caveAndScenarioSetVariables() {
-
-    scenario_id = scenarioSelectInput.value;
-    user_cave = caveSelectInput.value;
-    bookID = bookIDObject.value;
-
-    return caveAndScenarioCheck(user_cave, scenario_id);
 }
 
 
@@ -206,6 +341,9 @@ async function fetchScript(bookID, scenario_id, user_cave) {
 
 /** Called once the send button is clicked and sends the inputed text to the fetch function that calls the Oracle Endpoint*/
 async function sendChat() {
+    sendButton.innerHTML ="CONTACTING...";
+    messageBoxDiv[0].classList.add("hide")
+
     let user_input = inputField.value;
     let user_name = "You";
     let oracle_name = "Oracle";
@@ -224,6 +362,11 @@ async function sendChat() {
 
     interactionCalculator(response_object);
     update_DOM(response, oracle_name);
+    sendButton.classList.add("hide");
+    sendButton.innerHTML ="SEND MESSAGE";
+    messageBoxDiv[0].classList.add("hide")
+    messageBoxDiv[1].classList.remove("hide")
+    tryAgainButton.classList.remove("hide");
 }
 
 
@@ -247,22 +390,13 @@ async function BookAndInteractionVerify(bookID) {
 }
 
 /** Called once the scenario is changed or selected, and checks if there needs to be script for the Oracle or not*/
-async function scenarioVerify() {
+async function valueVerify() {
 
-    let check = await caveAndScenarioSetVariables();
-
-    if (check === 0) {
-        return;
-    }
-
-    if (checkInputLength(0)) {
-    } else {
-
-      return;
-    }
+    scenario_id = scenarioSelectInput.value;
+    user_cave = caveSelectInput.value;
+    bookID = bookIDObject.value;
 
     let oracle_name = "Oracle";
-    console.log("error 4")
     const res = await fetchScript(bookID, scenario_id, user_cave);
 
     response_object = await res.json();
@@ -292,48 +426,5 @@ async function scenarioVerify() {
 
 };
 
-/** Called once the scenario is changed or selected, and checks if there needs to be script for the Oracle or not*/
-async function caveVerify() {
-
-    let check = await caveAndScenarioSetVariables()
 
 
-    if (check === 0) {
-        return;
-    }
-
-    if (checkInputLength(0)) {
-    } else {
-      return;
-    }
-
-    let oracle_name = "Oracle";
-
-    const res = await fetchScript(bookID, scenario_id, user_cave);
-
-    response_object = await res.json();
-    response = response_object["scenario_script"];
-
-    if (response != "400") {
-      if (response != "no script needed") {
-        window.chat_history = response;
-        console.log(response_object);
-        //consoleDiv.innerHTML = JSON.stringify(response_object)
-      } else {
-        console.log(response_object);
-        //consoleDiv.innerHTML = JSON.stringify(response_object)
-      }
-    }
-
-    //consoleDiv.innerHTML = JSON.stringify(response_object)
-
-    if (bookVerify(response_object)) {
-      console.log("error 3")
-      interactionCalculator(response_object)  ;
-    }
-
-    if (response !== "no script needed") {
-        update_DOM(response, oracle_name);
-    }
-
-};

@@ -3,65 +3,48 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <img class="cave-img" src="{% static 'images/cave.png' %}">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-8" style="margin-bottom: 0%;">
+<div class="box fade-in chat-box hide">
+            <i></i>
+            <h4 id="oracle-response"><span class="highlight stroke-text smooth-16">Welcome to the our portal with the Oracle. Connecting with the Oracle will help you move the game forward but also uses your messages to get themselves better grounded in the world. They struggle with being in one place at one time and your contributions help keep them tethered for long enough to have a look around. Enter in your book ID, CAVE, and scenario to begin. You get 3 interactions per scenario; think twice about your question. Select scenario 0 to begin. You get 3 interactions per scenario; think twice about your question. Select scenario 0 to begin. You get 3 interactions per scenario; think twice about your question. Select scenario 0 to begin.</span></h4>
+
+
+</div>
+
+
+<div class="container left-container ">
+    <div class="row cta background fade-in">
+        <div class="col-12 backdrop-shadow">
             <h2>WE EXIST IN BODY, IN PLACE AND IN STORY.</h2>
             <h4>WHICH CAVE WILL YOU FIND? Welcome to the our portal with the Oracle. Connecting with the Oracle will help you move the game forward but also uses your messages to get themselves better grounded in the world. They struggle with being in one place at one time and your contributions help keep them tethered for long enough to have a look around. Enter in your book ID, CAVE, and scenario to begin. You get 3 interactions per scenario; think twice about your question. Select scenario 0 to begin.</h4>
-            <br>
-            <h4 class="input-header-desktop"><i>Select the scenario you've just finished or select "0" to interact with the Oracle before playing:</i></h4>
+        </div>
+    </div>
+
+    <div class="row background book-inputs production-console fade-in hide">
+        <div class="col-12 backdrop-shadow">
+            <h4 class=""><i>Select the scenario you've just finished or select "0" to interact with the Oracle before playing:</i></h4>
             <h4 class="cave-scenario-error hide">Please make sure to select a valid CAVE and Scenario ID.</h4>
-            <h4 class="intro-book input-header-desktop"><i>Please enter your Book ID to ask your questions:</i></h4>
             <h4 class="error-book hide">The Book ID you entered was incorrect.</h4>
-        </div>
-        <div class="col-4" style="margin-bottom: 0%;">
-            <img class="lunar-phases-img" src="{% static 'images/lunar-phases.png' %}">
-            <img class="mini-moon-img" src="{% static 'images/mini-moon.png' %}">
+            <h4 class="interactions-text hide"></h4>
         </div>
     </div>
 
-    <div class="row chat_box_row hide">
-        <div class="col-2"></div>
-        <div class="col-8 chat_box fade-in" id="chat_box">
+    <div class="row cta fade-in">
+        <div class="col-3-sm col-3">
         </div>
-        <div class="col-2"></div>
-    </div>
-
-    <div class="row error-interactions hide">
-        <div class="col-2" id="input-header-mobile">
-            <h4><i>You are out of questions...</i></h4>
+        <div class="col-6-sm col-6 backdrop-shadow margin-top-reduction">
+            <button class="button">Begin</button>
         </div>
-        <div class="col-2" class="input-header-desktop">
-            <h4><i>You are out of questions...</i></h4>
+        <div class="col-3-sm col-3">
         </div>
     </div>
 
-    <div class="row interactions hide">
-        <div class="col-12">
-            <h4 class="interactions-text"></h4>
+    <div class="row book-inputs fade-in hide">
+        <div class="col-3-sm col-3 book-input-spacer fade-in">
         </div>
-    </div>
-
-    <div class="row message-box hide">
-        <div class="col-6">
-            <textarea id="text-input" class="text-input" rows="4" placeholder="Enter text here..."></textarea>
-        </div>
-        <div class="col-4">
-            <button class="send-text-message button">SEND YOUR MESSAGE</button>
-        </div>
-        <div class="col-2"></div>
-    </div>
-
-    <div class="row">
-        <div class="col-3">
+        <div class="col-6-sm col-6 fade-in">
             <form>
                 <input
-                  class="chosen-value"
+                  class="chosen-value backdrop-shadow"
                   type="text"
                   value=""
                   placeholder="CAVE SELECT"
@@ -77,10 +60,17 @@
                 </ul>
               </form>
         </div>
-        <div class="col-3">
+        <div class="col-3-sm col-3">
+        </div>
+    </div>
+
+    <div class="row book-inputs fade-in hide">
+      <div class="col-3-sm col-3 book-input-spacer">
+        </div>
+        <div class="col-6-sm col-6 fade-in">
             <form>
                 <input
-                  class="chosen-value"
+                  class="chosen-value backdrop-shadow"
                   type="text"
                   value=""
                   placeholder="SCENARIO SELECT"
@@ -96,27 +86,75 @@
                 </ul>
               </form>
         </div>
-        <div class="col-4">
+        <div class="col-3-sm col-3">
+        </div>
+    </div>
+
+    <div class="row book-inputs fade-in hide">
+      <div class="col-3-sm col-3 book-input-spacer fade-in">
+        </div>
+        <div class="col-6-sm col-6 fade-in">
             <form>
-                <input class="book-id" placeholder="Enter your Book Number..." oninput="checkInputLength(1)">
+                <input class="book-id backdrop-shadow" placeholder="BOOK ID">
             </form>
 
             </input>
         </div>
+        <div class="col-3-sm col-3">
+        </div>
     </div>
 
-    <!--<div class="row">
-        <div class="col-12 console"></div>
-    </div>-->
-
-    <div class="row" id="footer-row">
-        <div class="col-10"></div>
-        <div class="col-2">
-            <p class="footer-text"><a href="https://ukaiprojects.com/what-is-ukai">About UKAI</a></p>
+    <div class="row book-inputs fade-in hide">
+        <div class="col-3-sm col-3 book-input-spacer">
+        </div>
+        <div class="col-3-sm col-3 backdrop-shadow">
+            <button class="button-back button margin-top-reduction">Back</button>
+        </div>
+        <div class="col-3-sm col-3 backdrop-shadow">
+            <button class="button-start button margin-top-reduction">Start</button>
+        </div>
+        <div class="col-3-sm col-3">
         </div>
     </div>
 </div>
 
+<div class="container middle-container">
+    <div class="row message-box fade-in hide ">
+        <div class="col-2 mobile-spacer-remove"></div>
+        <div class="col-12-sm col-8">
+            <textarea id="text-input" class="text-input backdrop-shadow" rows="4" placeholder="The Oracle waits, limping..."></textarea>
+        </div>
+        <div class="col-2 mobile-spacer-remove"></div>
+    </div>
+
+    <div class="row message-box fade-in hide">
+        <div class="col-2-sm col-4"></div>
+        <div class="col-8-sm col-4 margin-top-reduction backdrop-shadow">
+            <button class="send-text-message button">SEND YOUR MESSAGE</button>
+            <button class="try-again-button button hide">TRY AGAIN</button>
+        </div>
+        <div class="col-2-sm col-4"></div>
+    </div>
+</div>
+
+<div class="container right-container">
+  <div class="row">
+    <div class="col-2-sm col-2 mobile-menu-button hide fade-in">
+        <button class="button margin-top-reduction">Update</button>
+    </div>
+    <div class="col-2 mobile-spacer-remove"></div>
+    <div class="col-2-sm col-2 footer-text fade-in">
+        <p><a href="https://ukaiprojects.com/what-is-ukai">About UKAI</a></p>
+    </div>
+  </div>
+</div>
+
+    <!--<div class="row">
+        <div class="col-12 console"></div>
+    </div>-->
+</div>
+
 <script src="{% static 'main.js' %}"></script>
 <script src="{% static 'ground-page.js' %}"></script>
+<script src="{% static 'moon-dial.js' %}"></script>
 
