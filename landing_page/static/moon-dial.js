@@ -1,4 +1,4 @@
-function createImages() {
+/*function createImages() {
   const numImages = 8; // Total number of images
   const imageWidth = 40; // Width of the images
   const ellipseXSizeVW = 40; // X size of the ellipse in viewport width (vw)
@@ -119,3 +119,4 @@ window.addEventListener("load", function () {
 });
 
 
+*/

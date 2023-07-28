@@ -129,12 +129,12 @@ button {
 
 .background-image.layer-1 {
   z-index: -3;
-  background-image: url('images/Backgrounds/Background-1-2.png');
+  background-image: url('/static/images/Backgrounds/Background-1-2.png');
 }
 
 .background-image.layer-2 {
   z-index: -2;
-  background-image: url('images/Backgrounds/Background-2-1.png');
+  background-image: url('/static/images/Backgrounds/Background-2-1.png');
 }
 
 /* ==== ==== ==== ==== */
