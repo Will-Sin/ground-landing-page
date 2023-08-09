@@ -129,12 +129,12 @@ button {
 
 .background-image.layer-1 {
   z-index: -3;
-  background-image: url('/static/images/Backgrounds/Background-1-2.png');
+  background-image: url('images/Backgrounds/Background-1-2.png');
 }
 
 .background-image.layer-2 {
   z-index: -2;
-  background-image: url('/static/images/Backgrounds/Background-2-1.png');
+  background-image: url('images/Backgrounds/Background-2-1.png');
 }
 
 /* ==== ==== ==== ==== */
@@ -198,13 +198,14 @@ a:visited {
 
 a:link {
   color: black;
+  font-weight: 600;
 }
 
 /* ORACLE Response Text */
 
 .highlight {
   padding: 0.15rem;
-  font-family: 'Garamon(d/t)';
+  font-family: 'Garamon(d/t)', 'Times New Roman';
   font-style: normal;
   color: #DDA011;
   font-size: 1.5rem;
@@ -212,9 +213,9 @@ a:link {
 }
 
 .stroke-text{
-  --stroke-color:black;
-  --stroke-width:5px;
-  color:white;
+  --stroke-color: #1C2784;
+  --stroke-width:4px;
+  color: #F3F3F3;
   text-shadow: var(--stroke-width)  0 0 var(--stroke-color),
     calc(var(--stroke-width) * -1) 0 0 var(--stroke-color),
     0 var(--stroke-width) 0 var(--stroke-color),
@@ -450,12 +451,12 @@ textarea {
 }
 
 .send-text-message, .try-again-button {
-  font-family: 'Garamon(d/t)';
+  font-family: 'Garamon(d/t)', 'Times New Roman';
   font-weight: 600;
 }
 
 .send-text-message:hover, .try-again-button:hover {
-  font-family: 'Garamon(d/t)';
+  font-family: 'Garamon(d/t)', 'Times New Roman';
   letter-spacing: 0rem;
 }
 
@@ -537,9 +538,10 @@ svg > ellipse {
 
   .right-container {
     position: fixed;
-    bottom: 0%;
-    right: 0%;
-    z-index: 1;
+    bottom: 2%;
+    right: 3%;
+    z-index: 0;
+    max-width: 30%;
   }
 
   textarea {

@@ -31,7 +31,7 @@ const placeholders = ['CAVE SELECT', 'SCENARIO SELECT']; // Add the desired plac
 
 // Hidden divs
 
-const messageBoxDiv = document.getElementsByClassName("message-box");
+const messageBoxDiv = document.querySelectorAll(".message-box");
 const bookErrorDiv = document.getElementsByClassName("error-book")[0];
 const interactionsCountTextDiv = document.getElementsByClassName("interactions-text")[0];
 const errorInteractionsDiv = document.getElementsByClassName("error-interactions")[0];
@@ -100,9 +100,9 @@ function compareHeights() {
   pHeight = pTag.offsetHeight;
 
   if (iHeight > pHeight * 1.1 && counter !== 500) {
-    console.log("Frame too tall");
-    console.log(pHeight);
-    console.log(iHeight);
+    //console.log("Frame too tall");
+    //console.log(pHeight);
+    //console.log(iHeight);
     box.style.height = `${iHeight - 2}px`;
     counter++;
     compareHeights(); // Recursively call compareHeights()
@@ -114,9 +114,9 @@ function adjustHeightIfShort() {
   pHeight = pTag.offsetHeight;
 
   if (iHeight < pHeight && counter !== 500) {
-    console.log("Frame too short");
-    console.log(pHeight);
-    console.log(iHeight);
+    //console.log("Frame too short");
+    //console.log(pHeight);
+    //console.log(iHeight);
     box.style.height = `${iHeight + 2}px`;
     counter++
     adjustHeightIfShort(); // Recursively call adjustHeightIfShort()
@@ -189,6 +189,7 @@ ctaButton.addEventListener("click", function () {
     item.classList.remove("hide");
   });
 
+  // If on desktop, remove the mobile maxWidth CSS parameter.
   if (windowWidth > 1280) {
     productionConsole.style.maxWidth = null;
   };
@@ -207,6 +208,14 @@ ctaBackButton.addEventListener("click", function () {
     col.classList.remove("hide");
   });
 
+  messageBoxDiv.forEach((item) => {
+    // Check if the "hide" class is NOT present in the current element's classList
+    if (!item.classList.contains("hide")) {
+      // Add the "hide" class to the current element
+      item.classList.add('hide');
+    }
+  });
+
 });
 
 // Button to be clicked after recieving a response from the Oracle, and to access the message pannel again.
@@ -223,6 +232,14 @@ sendButton.onclick = sendChat;
 mobileMenuButton.addEventListener("click", function () {
   leftContainerDiv.classList.remove("hide");
   mobileMenuButton.classList.add("hide");
+
+  messageBoxDiv.forEach((item) => {
+    // Check if the "hide" class is NOT present in the current element's classList
+    if (!item.classList.contains("hide")) {
+      // Add the "hide" class to the current element
+      item.classList.add('hide');
+    }
+  });
 });
 
 // Loop through each dropdown
@@ -244,7 +261,6 @@ dropdowns.forEach((dropdown, index) => {
 function bookVerify(response_object) {
   if (response_object["Book ID"] == "Invalid") {
     //Error message about Offering String
-    console.log("error 2")
     bookErrorDiv.classList.remove("hide");
     return false;
   }
@@ -271,10 +287,24 @@ function interactionCalculator(response_object) {
 
   if (interactionsCount <= 0) {
 
-    messageBoxDiv[0].classList.add("hide");
-    messageBoxDiv[1].classList.add("hide");
+    tryAgainButton.classList.add("hide");
+
+    messageBoxDiv.forEach((item) => {
+        // Check if the "hide" class is NOT present in the current element's classList
+        if (!item.classList.contains("hide")) {
+          // Add the "hide" class to the current element
+          item.classList.add('hide');
+        }
+      });
+
     interactionsCountTextDiv.classList.remove("hide")
     interactionsCountTextDiv.innerHTML = `<i>You are out of questions...</i>`;
+
+    // Check if the window width is less than 1280 pixels and then show the upper (left) pannel.
+    if (windowWidth < 1280) {
+      leftContainerDiv.classList.remove("hide");
+      mobileMenuButton.classList.add("hide");
+    };
 
     return 0;
   } else {
@@ -364,10 +394,10 @@ async function sendChat() {
     update_DOM(response, oracle_name);
     sendButton.classList.add("hide");
     sendButton.innerHTML ="SEND MESSAGE";
-    messageBoxDiv[0].classList.add("hide")
-    messageBoxDiv[1].classList.remove("hide")
+    messageBoxDiv[0].classList.add("hide");
+    messageBoxDiv[1].classList.remove("hide");
     tryAgainButton.classList.remove("hide");
-}
+};
 
 
 /** Called once the scenario is changed or selected, and checks if there needs to be script for the Oracle or not*/
@@ -380,9 +410,9 @@ async function BookAndInteractionVerify(bookID) {
     response_object = await res.json();
 
     //consoleDiv.innerHTML = JSON.stringify(response_object);
-    console.log("error 1")
+
     if (bookVerify(response_object)) {
-      console.log("error 3")
+
       interactionCalculator(response_object)  ;
     }
 
@@ -416,15 +446,11 @@ async function valueVerify() {
     //consoleDiv.innerHTML = JSON.stringify(response_object)
 
     if (bookVerify(response_object)) {
-      console.log("error 3")
-      interactionCalculator(response_object)  ;
-    }
+      interactionCalculator(response_object);
 
-    if (response !== "no script needed") {
+      if (response != "no script needed" && response != "") {
+        console.log(response)
         update_DOM(response, oracle_name);
+      }
     }
-
 };
-
-
-
