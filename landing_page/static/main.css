@@ -210,11 +210,11 @@ a:link {
   font-style: normal;
   color: #DDA011;
   font-size: 1.5rem;
-  line-height: 1.3rem;
+  line-height: 1.4rem;
 }
 
 .stroke-text{
-  --stroke-color: #1C2784;
+  --stroke-color: #78622B;
   --stroke-width:4px;
   color: #F3F3F3;
   text-shadow: var(--stroke-width)  0 0 var(--stroke-color),
