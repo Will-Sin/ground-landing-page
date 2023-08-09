@@ -39,7 +39,7 @@
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-    ascent-override: 215%;
+    /*ascent-override: 215%;*/
 }
 
 @font-face {
