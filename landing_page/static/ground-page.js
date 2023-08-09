@@ -27,7 +27,7 @@ const windowWidth = window.innerWidth;
 // Drop Downs
 const inputFields = document.querySelectorAll('.chosen-value');
 const dropdowns = document.querySelectorAll('.value-list');
-const placeholders = ['CAVE SELECT', 'SCENARIO SELECT']; // Add the desired placeholders in the same order as the forms
+const placeholders = ['CAVE', 'SCENARIO']; // Add the desired placeholders in the same order as the forms
 
 // Hidden divs
 
