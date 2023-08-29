@@ -21,7 +21,7 @@ const mobileMenuButton = document.getElementsByClassName("mobile-menu-button")[0
 const leftContainerDiv = document.getElementsByClassName("left-container")[0];
 const footerURL = document.getElementsByClassName("footer-text")[0];
 const productionConsole = document.getElementsByClassName("production-console")[0];
-
+const introTextDiv = document.getElementsByClassName("intro-text")[0];
 const windowWidth = window.innerWidth;
 
 // Drop Downs
@@ -33,6 +33,7 @@ const placeholders = ['CAVE', 'SCENARIO']; // Add the desired placeholders in th
 
 const messageBoxDiv = document.querySelectorAll(".message-box");
 const bookErrorDiv = document.getElementsByClassName("error-book")[0];
+const scenarioErrorDiv = document.getElementsByClassName("error-scenario")[0];
 const interactionsCountTextDiv = document.getElementsByClassName("interactions-text")[0];
 const errorInteractionsDiv = document.getElementsByClassName("error-interactions")[0];
 const caveAndScenarioErrorDiv = document.getElementsByClassName("cave-scenario-error")[0];
@@ -136,7 +137,7 @@ function adjustHeightIfShort() {
 ctaStartButton.addEventListener("click", function () {
 
   // Add removeable spacers if the screen is greater than 1280
-  if (windowWidth > 1280) {
+  if (!mobileCheck()) {
     removableInputSpacers.forEach(function (col) {
       col.classList.add("hide");
     });
@@ -172,7 +173,7 @@ ctaStartButton.addEventListener("click", function () {
     valueVerify();
 
     // Check if the window width is less than 1280 pixels and then hide the upper (left) pannel.
-    if (windowWidth < 1280) {
+    if (mobileCheck()) {
       leftContainerDiv.classList.add("hide");
     } else {
       productionConsole.style.maxWidth = "34rem";
@@ -190,7 +191,7 @@ ctaButton.addEventListener("click", function () {
   });
 
   // If on desktop, remove the mobile maxWidth CSS parameter.
-  if (windowWidth > 1280) {
+  if (!mobileCheck()) {
     productionConsole.style.maxWidth = null;
   };
 });
@@ -271,6 +272,40 @@ function bookVerify(response_object) {
   }
 }
 
+function scenarioVerify(response_object) {
+  if (response_object["response"] == "Please select the correct scenario.") {
+    //Error message about the selected scenario
+    scenarioErrorDiv.classList.remove("hide");
+    return false;
+  }
+  else {
+    scenarioErrorDiv.classList.add("hide");
+    return true;
+  }
+}
+
+// A function to check whether the screen width is larger or less than 1280 pixels, which can then be used to determine how to display
+// certain elements.
+function mobileCheck() {
+  // If on desktop return false
+  if (windowWidth >= 1280) {
+    return false;
+  } else if (windowWidth < 1280) {
+    return true;
+  };
+}
+
+// Sets the token count for the Oracle response because it cannot be larger than 140 tokens, otherwise it will overflow on the screen.
+// A better solution to this would be to have "pages" where if the response is larger than 140 tokens, there is a NEXT and a BACK button that
+// will allow the user to flip through the pages of the response.
+function mobileCharacterCountUpdate() {
+  if (mobileCheck()) {
+    return "mobile";
+  } else {
+    return "desktop";
+  };
+};
+
 /** Takes a text input and user name to then post the chat repsonse into the DOM*/
 function update_DOM(input, user) {
   const textH4 = document.getElementById("oracle-response");
@@ -285,8 +320,10 @@ function interactionCalculator(response_object) {
 
   console.log(interactionsCount);
 
+  // If the interaction count is equal to or less than 0, hide the TRY AGAIN button so people are restricted to their interactions count.
+  // The Else statement is whether there is interactions still available.
   if (interactionsCount <= 0) {
-
+    console.log("HIDE TRY AGAIN")
     tryAgainButton.classList.add("hide");
 
     messageBoxDiv.forEach((item) => {
@@ -301,26 +338,32 @@ function interactionCalculator(response_object) {
     interactionsCountTextDiv.innerHTML = `<i>You are out of questions...</i>`;
 
     // Check if the window width is less than 1280 pixels and then show the upper (left) pannel.
-    if (windowWidth < 1280) {
+    if (mobileCheck()) {
       leftContainerDiv.classList.remove("hide");
       mobileMenuButton.classList.add("hide");
     };
-
-    return 0;
   } else {
+    console.log("ELSE");
 
-    messageBoxDiv[0].classList.remove("hide");
-    messageBoxDiv[1].classList.remove("hide");
-    interactionsCountTextDiv.classList.remove("hide")
+    // If the send button is hidden, show the TRY AGAIN button because this is within the Else statement that states there are interactions
+    // available, which means the user should be able to send another message by clicking the TRY AGAIN button.
+    // The Else statement would trigger if the SEND button is not hidden, and the rest of the Message Box divs will then be shown
+    // so that the user can ingage with the Oracle.
+    if (sendButton.classList.contains("hide")) {
+      console.log("SHOW TRY AGAIN");
+      tryAgainButton.classList.remove("hide");
+    } else {
+      messageBoxDiv[0].classList.remove("hide");
+      messageBoxDiv[1].classList.remove("hide");
+    };
+    interactionsCountTextDiv.classList.remove("hide");
     interactionsCountTextDiv.innerHTML = `<i>You now can ask <b>${interactionsCount}</b> questions to the Oracle. After those are up, you'll need a new offering.</i>`;
-
-    return 1;
   }
 }
 
 
 /** A fetch function that sends inputed text to the Oracle Endpoint and returns its response*/
-async function fetchChat(user_input, chat_history) {
+async function fetchChat(user_input, chat_history, device) {
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -328,7 +371,8 @@ async function fetchChat(user_input, chat_history) {
     var raw = JSON.stringify({
     "book": {
         "current_inquiry": String(user_input),
-        "chat_history": String(chat_history)
+        "chat_history": String(chat_history),
+        "device": String(device)
     }
     });
 
@@ -369,6 +413,7 @@ async function fetchScript(bookID, scenario_id, user_cave) {
   return fetch(`${productionURL}/script/${bookID}/${user_cave}/${scenario_id}/`, requestOptions);
 }
 
+
 /** Called once the send button is clicked and sends the inputed text to the fetch function that calls the Oracle Endpoint*/
 async function sendChat() {
     sendButton.innerHTML ="CONTACTING...";
@@ -380,7 +425,11 @@ async function sendChat() {
 
     console.log(inputField.value);
 
+
     //update_DOM(user_input, user_name);
+
+    let device = mobileCharacterCountUpdate();
+    console.log(device);
 
     const res = await fetchChat(user_input, chat_history);
 
@@ -390,13 +439,14 @@ async function sendChat() {
     response = response_object["gpt response"];
     window.chat_history = response_object["chat history"];
 
+    // Calls the InteractionCalculator to determine if there are enough interactions left to interact with the Oracle
+    // and the proper buttons will or will not be shown depending on the available interactions.
     interactionCalculator(response_object);
     update_DOM(response, oracle_name);
-    sendButton.classList.add("hide");
-    sendButton.innerHTML ="SEND MESSAGE";
-    messageBoxDiv[0].classList.add("hide");
-    messageBoxDiv[1].classList.remove("hide");
-    tryAgainButton.classList.remove("hide");
+    sendButton.innerHTML = "SEND MESSAGE";
+
+    // The message is cleared from the message box once the send call is completed.
+    document.getElementsByClassName("text-input")[0].value = '';
 };
 
 
@@ -432,25 +482,38 @@ async function valueVerify() {
     response_object = await res.json();
     response = response_object["scenario_script"];
 
+    console.log(response);
+
+    // Need to look through this.
     if (response != "400") {
       if (response != "no script needed") {
         window.chat_history = response;
         console.log(response_object);
-        //consoleDiv.innerHTML = JSON.stringify(response_object)
       } else {
         console.log(response_object);
-        //consoleDiv.innerHTML = JSON.stringify(response_object)
-      }
-    }
+      };
+    };
 
-    //consoleDiv.innerHTML = JSON.stringify(response_object)
-
-    if (bookVerify(response_object)) {
+    // Checks to see if the response object claimed the book was valid or not, and whether the correct scenario was selected.
+    if (bookVerify(response_object) & scenarioVerify(response_object)) {
+      // Calls the InteractionCalculator to determine if there are enough interactions left to interact with the Oracle
+      // and the proper buttons will or will not be shown depending on the available interactions.
       interactionCalculator(response_object);
 
+      // If the repsonse object does not say "no script needed" and the response isn't empty, update the Oracles response.
       if (response != "no script needed" && response != "") {
-        console.log(response)
+        console.log(response);
         update_DOM(response, oracle_name);
-      }
-    }
+      };
+    } else {
+      // If there is an error with the bookVerify or ScenarioVerify, the SEND button and messgae box will be hidden, and
+      // the interactions notification will be removed.
+      messageBoxDiv[0].classList.add("hide");
+      messageBoxDiv[1].classList.add("hide");
+      interactionsCountTextDiv.classList.add("hide");
+    };
+
+    if (response_object["next_scenario"] >= 2) {
+      introTextDiv.classList.add("hide");
+    };
 };

@@ -461,6 +461,20 @@ textarea {
   letter-spacing: 0rem;
 }
 
+.text-input {
+  opacity: 40%;
+  animation-duration: 1s;
+  animation-name: animate-fade-out-half;
+  animation-fill-mode: backwards;
+}
+
+.text-input:focus {
+  opacity: 100%;
+  animation-duration: 1s;
+  animation-name: animate-fade-in-half;
+  animation-fill-mode: backwards;
+}
+
 /* Animations */
 
 .fade-in {
@@ -472,6 +486,16 @@ textarea {
 @keyframes animate-fade {
   0% { opacity: 0; }
   100% { opacity: 3; }
+}
+
+@keyframes animate-fade-out-half {
+  0% { opacity: 100%; }
+  100% { opacity: 40%; }
+}
+
+@keyframes animate-fade-in-half {
+  0% { opacity: 40%; }
+  100% { opacity: 100%; }
 }
 
 /* ==== Moon Dial ==== */
